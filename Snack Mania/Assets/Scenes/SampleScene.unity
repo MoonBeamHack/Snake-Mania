@@ -5957,7 +5957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95caf8e273a86404099ac313b017478f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
+  Speed: 5
   AliveEyes: {fileID: 1909678162}
   DeadEyes: {fileID: 949544547}
   SkinColor:
@@ -6148,6 +6148,7 @@ MonoBehaviour:
   - {fileID: 707470356}
   - {fileID: 1000678904}
   - {fileID: 714980655}
+  doInstantly: 1
 --- !u!61 &962581679
 BoxCollider2D:
   m_ObjectHideFlags: 0

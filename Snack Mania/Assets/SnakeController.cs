@@ -22,6 +22,7 @@ public class SnakeController : MonoBehaviour
 
     [SerializeField] Transform bonePrefab;
     public List<Transform> Bone = new List<Transform>();
+    [SerializeField] bool doInstantly;
     private void Start()
     {
         GameManager.isGameRunning = true;
@@ -151,9 +152,18 @@ public class SnakeController : MonoBehaviour
 
     public void ChangeSkinColor(int colorID)
     {
+        StartCoroutine(changingSkinColor(colorID));
+    }
+
+    IEnumerator changingSkinColor(int colorID)
+    {
         for (int i = 0; i < Bone.Count; i++)
         {
             Bone[i].GetComponent<SpriteRenderer>().color = SkinColor[colorID];
+            if (!doInstantly)
+                yield return new WaitForFixedUpdate();
+            else
+                yield return new WaitForSeconds(0);
         }
         bonePrefab.GetComponent<SpriteRenderer>().color = SkinColor[colorID];
     }
