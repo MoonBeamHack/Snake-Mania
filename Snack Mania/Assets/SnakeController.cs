@@ -8,6 +8,9 @@ public class SnakeController : MonoBehaviour
     [SerializeField] private GameObject AliveEyes;
     [SerializeField] private GameObject DeadEyes;
     [SerializeField] private List<Color> SkinColor = new List<Color>();
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private int initialSize;
+    [SerializeField] private Food food;
 
 
     private float OriginalSpeed;
@@ -25,12 +28,34 @@ public class SnakeController : MonoBehaviour
     [SerializeField] bool doInstantly;
     private void Start()
     {
-        GameManager.isGameRunning = true;
         tempPos = transform.position;
+        ResetGame();
+        GetComponent<SpriteRenderer>().color = bonePrefab.GetComponent<SpriteRenderer>().color;
+        
+    }
+
+    private void ResetGame()
+    {
+        GameManager.isGameRunning = true;
         SetSpeed(Speed);
         AliveEyes.SetActive(true);
         DeadEyes.SetActive(false);
-        ChangeSkinColor(0);
+
+
+        for (int i = 1; i < Bone.Count; i++)
+        {
+            DestroyImmediate(Bone[i].gameObject);
+        }
+        Bone.Clear();
+        Bone.Add(this.transform);
+
+        transform.position = tempPos;
+
+        for (int i = 0; i < initialSize; i++)
+        {
+            Bone.Add(Instantiate(bonePrefab));
+        }
+        food.RePosition();
     }
     private void Update()
     {
@@ -67,6 +92,11 @@ public class SnakeController : MonoBehaviour
             //tempPos += new Vector3(Direction.x, Direction.y) * Time.deltaTime * Speed;
             //transform.position = new Vector3(Mathf.Round(tempPos.x), Mathf.Round(tempPos.y));
             #endregion
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+                ResetGame();
         }
     }
 
@@ -118,6 +148,28 @@ public class SnakeController : MonoBehaviour
             transform.position = new Vector3(
                 Mathf.Round(this.transform.position.x) + Direction.x,
                 Mathf.Round(this.transform.position.y) + Direction.y);
+            
+            FoodGrid MouthInGrid = food.grid.Find(x => x.position == transform.position);
+            FoodGrid TailInGrid = food.grid.Find(x => x.position == Bone[Bone.Count - 1].position);
+            int index;
+            if (MouthInGrid != null)
+            {
+                index = food.grid.IndexOf(MouthInGrid);
+                MouthInGrid.Occupied = true;
+                food.grid[index] = MouthInGrid;
+            }
+            else
+            {
+                Debug.Log("Mouth Grid not found");
+            }
+            if(TailInGrid != null)
+            {
+                index = food.grid.IndexOf(TailInGrid);
+                TailInGrid.Occupied = false;
+                food.grid[index] = TailInGrid;
+            }
+
+
         }
     }
 
@@ -138,16 +190,18 @@ public class SnakeController : MonoBehaviour
     {
         if(other.CompareTag("Food"))
         {
-            other.GetComponent<Food>().RePosition();
+            Food food = other.GetComponent<Food>();
+            ChangeSkinColor(food.currentColor);
+            food.RePosition();
             Grow();
         }
-        if(other.CompareTag("Obstacle"))
+        /*if(other.CompareTag("Obstacle"))
         {
             Debug.Log("GameOver");
             GameManager.isGameRunning = false;
             DeadEyes.SetActive(true);
             AliveEyes.SetActive(false);
-        }
+        }*/
     }
 
     public void ChangeSkinColor(int colorID)
@@ -157,6 +211,7 @@ public class SnakeController : MonoBehaviour
 
     IEnumerator changingSkinColor(int colorID)
     {
+        Debug.Log("changing  color :" + colorID);
         for (int i = 0; i < Bone.Count; i++)
         {
             Bone[i].GetComponent<SpriteRenderer>().color = SkinColor[colorID];
