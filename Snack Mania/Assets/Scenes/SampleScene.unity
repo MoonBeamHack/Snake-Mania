@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95caf8e273a86404099ac313b017478f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
+  Speed: 1
   AliveEyes: {fileID: 1909678162}
   DeadEyes: {fileID: 949544547}
   SkinColor:
@@ -1888,6 +1888,7 @@ MonoBehaviour:
     m_Extent: {x: 22.9999, y: 12.9999, z: 0}
   currentColor: 0
   grid: []
+  EmptyCells: []
 --- !u!1 &1805429634
 GameObject:
   m_ObjectHideFlags: 0

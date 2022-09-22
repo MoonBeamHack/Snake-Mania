@@ -148,29 +148,39 @@ public class SnakeController : MonoBehaviour
             transform.position = new Vector3(
                 Mathf.Round(this.transform.position.x) + Direction.x,
                 Mathf.Round(this.transform.position.y) + Direction.y);
-            
-            FoodGrid MouthInGrid = food.grid.Find(x => x.position == transform.position);
-            FoodGrid TailInGrid = food.grid.Find(x => x.position == Bone[Bone.Count - 1].position);
-            int index;
-            if (MouthInGrid != null)
-            {
-                index = food.grid.IndexOf(MouthInGrid);
-                MouthInGrid.Occupied = true;
-                food.grid[index] = MouthInGrid;
-            }
-            else
-            {
-                Debug.Log("Mouth Grid not found");
-            }
-            if(TailInGrid != null)
-            {
-                index = food.grid.IndexOf(TailInGrid);
-                TailInGrid.Occupied = false;
-                food.grid[index] = TailInGrid;
-            }
 
-
+            StartCoroutine(GridUpdate());
         }
+    }
+
+    IEnumerator GridUpdate()
+    {
+        FoodGrid MouthInGrid = food.grid.Find(x => x.position == transform.position);
+        FoodGrid TailInGrid = food.grid.Find(x => x.position == Bone[Bone.Count - 1].position);
+        int index;
+        if (MouthInGrid != null)
+        {
+            index = food.grid.IndexOf(MouthInGrid);
+            MouthInGrid.Occupied = true;
+            food.grid[index] = MouthInGrid;
+        }
+        else
+        {
+            Debug.Log("Mouth Grid not found");
+        }
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+        if (TailInGrid != null)
+        {
+            index = food.grid.IndexOf(TailInGrid);
+            TailInGrid.Occupied = false;
+            food.grid[index] = TailInGrid;
+        }
+        else
+        {
+            Debug.Log("Tail Grid not found");
+        }
+
     }
 
     public void SetSpeed(float speed)
