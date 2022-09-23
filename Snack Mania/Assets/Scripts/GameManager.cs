@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameOver");
         isGameRunning = false;
+        CoinAmount += (int)( Score);
         UIManager.insta.OpenGameOverPanel();
     }
 }

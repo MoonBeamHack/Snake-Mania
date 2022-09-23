@@ -7,52 +7,20 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager insta;
 
-    [Header("GameplayMenu")]
-    public GameObject StartUI;    
-
-    [SerializeField] GameObject LoadingPanel;   
-
-    public TMP_Text usernameText;
+    
 
     
     
 
-    [SerializeField] TMP_Text statusText;
 
-    
 
-    // fight manager
-    [SerializeField] GameObject FightRequestUI;
-    [SerializeField] TMP_Text fightRequestText;
+     
 
-    [Header("No Coins Info")]
-    [SerializeField] GameObject NoCoinsUI;    
-
-    [Header("GameplayMenu")]
-    public GameObject GameplayUI;
-   [SerializeField] TMP_Text scoreTxt;  
+ 
 
   
 
 
-    [Header("VoiceChat")]
-    [SerializeField] Image recorderImg;
-    [SerializeField] Image listenerImg;
-    [SerializeField] Sprite[] recorderSprites; //0 on 1 off
-    [SerializeField] Sprite[] listenerSprites; //0 on 1 off
-
-
-    [Header("StoreAndCollection")]
-    [SerializeField] GameObject myCollectionUI;
-    [SerializeField] TMP_Text TxtHeaderCollection;
-    [SerializeField] GameObject LoadingMyCollection;
-    [SerializeField] GameObject MyCollectionObject;
-
-
-
-    [Header("Result")]
-    [SerializeField] Image resultImg;
-    [SerializeField] Sprite[] resultprites; //0 win 1 lose 2 tie
 
     [Header("Tutorial")]
     [SerializeField] GameObject TutorialUI;
@@ -62,6 +30,7 @@ public class UIManager : MonoBehaviour
     [Header("GameOverUI")]
     [SerializeField] GameObject GameOverUI;
     [SerializeField] TMP_Text Score;
+    [SerializeField] TMP_Text HighScore_Txt;
     [SerializeField] TMP_Text CoinsAward;
 
     [Header("GamePlay UI")]
@@ -80,14 +49,8 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-      
 
-        
-
-      
-
-      
+        UpdatePlayerUIData(DatabaseManager.Instance.GetLocalData());
     }
 
 
@@ -125,11 +88,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdatePlayerUIData(LocalData data)
     {
-       
-
-            scoreTxt.text = data.coins.ToString();
-          
-
+        CoinAmount.text = data.coins.ToString();
     }
   
 
@@ -147,21 +106,10 @@ public class UIManager : MonoBehaviour
 
     public void ShowNoCoinsPopup()
     {
-       
-        NoCoinsUI.SetActive(true);
-        LeanTween.scale(NoCoinsUI.transform.GetChild(0).gameObject, Vector3.one, 0.5f).setEase(LeanTweenType.easeInQuad);
 
-    }
-    public void CloseNoCoinsPopup()
-    {
+        MessaeBox.insta.showMsg("Not Enough Coins!", true);
 
-       
-        LeanTween.scale(NoCoinsUI.transform.GetChild(0).gameObject, Vector3.zero, 0.5f).setEase(LeanTweenType.easeInQuad).setOnComplete(() => {
-            NoCoinsUI.SetActive(false);
-        });
-
-    }
-
+    }   
     Coroutine coroutine;
     public void ShowInfoMsg(string info)
     {
@@ -178,7 +126,7 @@ public class UIManager : MonoBehaviour
     }
     IEnumerator disableTextInfo()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(2f);
         txt_information.transform.parent.gameObject.SetActive(false);
     }
 
@@ -188,10 +136,25 @@ public class UIManager : MonoBehaviour
         GameOverUI.SetActive(true);
         GamePlayUI.SetActive(false);
         Score.text = "Your Score : " + GameManager.Instance.Score.ToString();
-        CoinsAward.text = "Your Reward : " + ((int)(GameManager.Instance.Score /2)).ToString();
-        GameManager.Instance.CoinAmount += (int)(GameManager.Instance.Score / 2);
+        CoinsAward.text = "Your Reward : " + ((int)(GameManager.Instance.Score)).ToString();
+        
         CoinAmount.text = GameManager.Instance.CoinAmount.ToString();
-       //int highscore = DatabaseManager.Instance.GetLocalData().highscore;
+        int highscore = DatabaseManager.Instance.GetLocalData().highscore;
+        LocalData data = DatabaseManager.Instance.GetLocalData();
+        data.coins += GameManager.Instance.CoinAmount;
+
+        if (GameManager.Instance.Score > highscore)
+        {
+                    
+            highscore = GameManager.Instance.Score;
+            data.highscore = highscore;
+          
+        }
+
+        DatabaseManager.Instance.UpdateData(data);
+        UpdatePlayerUIData(data);
+        HighScore_Txt.text = "High Score : " + highscore;
+
     }
 
     public void PauseGame(bool pause)

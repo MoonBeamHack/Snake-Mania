@@ -105,7 +105,7 @@ public class CovalentManager : MonoBehaviour
 
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         loadingData = false;
     }
 

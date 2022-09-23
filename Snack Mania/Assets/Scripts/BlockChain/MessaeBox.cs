@@ -35,7 +35,7 @@ public class MessaeBox : MonoBehaviour
     {
         if (!okBtn.activeSelf)
         {
-            yield return new WaitForSeconds(40);
+            yield return new WaitForSecondsRealtime(40);
             okBtn.SetActive(true);
         }
     }

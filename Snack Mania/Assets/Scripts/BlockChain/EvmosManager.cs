@@ -188,12 +188,15 @@ public class EvmosManager : MonoBehaviour
 
             if (!string.IsNullOrEmpty(response))
             {
-               
-                InvokeRepeating("CheckTransactionStatus", 1, 5);
+                transID = response;
+                InvokeRepeating("CheckTransactionStatus", 1*Time.timeScale, 5*Time.timeScale);
                 if (MessaeBox.insta) MessaeBox.insta.showMsg("Your Transaction has been recieved\nCoins will reflect to your account once it is completed!", true);
             }
+            if (DatabaseManager.Instance)
+            {
+                DatabaseManager.Instance.AddTransaction(response, "pending", _pack);
+            }
 
-          
 
 
         }
@@ -202,8 +205,57 @@ public class EvmosManager : MonoBehaviour
             if (MessaeBox.insta) MessaeBox.insta.showMsg("Transaction Has Been Failed", true);
             Debug.Log(e, this);
         }
-    }
+    }    
     #endregion
+
+    private string transID;
+    async public void CheckTransactionStatus()
+    {
+        try
+        {
+            string txConfirmed = await EVM.TxStatus(chain, network, transID);
+            print(txConfirmed); // success, fail, pending
+            if (txConfirmed.Equals("success") || txConfirmed.Equals("fail"))
+            {
+
+                // NonBurnNFTBuyContract(0, "ipfs://bafyreigkpnryq6t53skpbmfylegrp7wl3xkegzxq7ogimvnkzdceisya4a/metadata.json");
+                CancelInvoke("CheckTransactionStatus");
+                if (DatabaseManager.Instance)
+                {
+                    DatabaseManager.Instance.ChangeTransactionStatus(transID, txConfirmed);
+                }
+
+            }
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e, this);
+        }
+    }
+    async public void CheckDatabaseTransactionStatus(string Id)
+    {
+        try
+        {
+            string txConfirmed = await EVM.TxStatus(chain, network, Id);
+            print(txConfirmed); // success, fail, pending
+            if (txConfirmed.Equals("success") || txConfirmed.Equals("fail"))
+            {
+                //CancelInvoke("CheckTransactionStatus");
+                if (DatabaseManager.Instance)
+                {
+                    DatabaseManager.Instance.ChangeTransactionStatus(Id, txConfirmed);
+                }
+            }
+
+
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e, this);
+        }
+    }
 
     #region NonBurnNFTBuy
     async public void NonBurnNFTBuyContract(int _no, string _uri)
@@ -250,6 +302,10 @@ public class EvmosManager : MonoBehaviour
 
             if (MessaeBox.insta) MessaeBox.insta.showMsg("Your Transaction has been recieved\nIt will reflect to your account once it is completed!", true);
 
+            if (StoreUI.insta)
+            {
+                StoreUI.insta.EnableNewItem();
+            }
             if (!string.IsNullOrEmpty(response))
             {
 
@@ -257,6 +313,10 @@ public class EvmosManager : MonoBehaviour
                 if (UIManager.insta) UIManager.insta.DeductCoins(_no);
 
                 CheckUserBalance();
+                if (StoreUI.insta)
+                {
+                    StoreUI.insta.SetBalanceText();
+                }
             }
 
         }

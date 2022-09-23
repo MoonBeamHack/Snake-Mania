@@ -9,7 +9,7 @@ public class SnakeController : MonoBehaviour
     [SerializeField] private int initialSize;
     [SerializeField] private GameObject AliveEyes;
     [SerializeField] private GameObject DeadEyes;
-    [SerializeField] private List<Color> SkinColor = new List<Color>();
+    [SerializeField] private List<Sprite> SkinColor = new List<Sprite>();
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Food food;
 
@@ -30,9 +30,11 @@ public class SnakeController : MonoBehaviour
     #region initialize snake
     public void StartGame()
     {
+        ChangeSkinColor(DatabaseManager.Instance.GetLocalData().selectedTheme);
+
         transform.position = Vector3.zero;
         ResetGame();
-        GetComponent<SpriteRenderer>().color = bonePrefab.GetComponent<SpriteRenderer>().color;
+       // GetComponent<SpriteRenderer>().color = bonePrefab.GetComponent<SpriteRenderer>().color;
         
     }
     private void ResetGame()
@@ -188,26 +190,17 @@ public class SnakeController : MonoBehaviour
 
     public void ChangeSkinColor(int colorID)
     {
+        bonePrefab.GetComponent<SpriteRenderer>().sprite = SkinColor[colorID];
         for (int i = 0; i < Bone.Count; i++)
         {
-            Bone[i].GetComponent<SpriteRenderer>().color = SkinColor[colorID];
+            Bone[i].GetComponent<SpriteRenderer>().sprite = SkinColor[colorID];
         }
-        bonePrefab.GetComponent<SpriteRenderer>().color = SkinColor[colorID];
+        
+      
+        
     }
 
-    IEnumerator ChangeSkinColorCO(int colorID)
-    {
-        Debug.Log("changing  color :" + colorID);
-        for (int i = 0; i < Bone.Count; i++)
-        {
-            Bone[i].GetComponent<SpriteRenderer>().color = SkinColor[colorID];
-            if (!doInstantly)
-                yield return new WaitForFixedUpdate();
-            else
-                yield return new WaitForSeconds(0);
-        }
-        bonePrefab.GetComponent<SpriteRenderer>().color = SkinColor[colorID];
-    }
+ 
     #endregion
     IEnumerator GridUpdate()
     {

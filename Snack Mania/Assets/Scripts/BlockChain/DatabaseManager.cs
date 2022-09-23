@@ -137,8 +137,18 @@ public class DatabaseManager : MonoBehaviour
                 //Debug.Log("CheckProfile " + www.downloadHandler.text);
                 data = Newtonsoft.Json.JsonConvert.DeserializeObject<LocalData>(obj.GetField("fields").GetField("userdata").GetField("stringValue").stringValue);
 
-               
-               
+                if (data.transactionsInformation != null && data.transactionsInformation.Count > 0)
+                {
+                    for (int i = 0; i < data.transactionsInformation.Count; i++)
+                    {
+                        if (data.transactionsInformation[i].transactionStatus.Equals("pending"))
+                        {
+                            Debug.Log("Pending Test 1");
+                            EvmosManager.Instance.CheckDatabaseTransactionStatus(data.transactionsInformation[i].transactionId);
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -260,11 +270,65 @@ public class DatabaseManager : MonoBehaviour
         return currentEpoch;
     }
 
-   
+    public void AddTransaction(string TransId, string status, int _shopId)
+    {
+        TranscationInfo info = new TranscationInfo(TransId, status);
+        switch (_shopId)
+        {
+            case 0:
+                {
+                    info.coinAmount = 20;
+                    break;
+                }
+            case 1:
+                {
+                    info.coinAmount = 50;
+                    break;
+                }
+            case 2:
+                {
+                    info.coinAmount = 100;
+                    break;
+                }
+            case 3:
+                {
+                    info.coinAmount = 200;
+                    break;
+                }
+        }
 
-    
-  
- 
+        data.transactionsInformation.Add(info);
+        UpdateData(data);
+    }
+    public void ChangeTransactionStatus(string transID, string txConfirmed)
+    {
+        Debug.Log("Changing Database " + transID + " " + txConfirmed);
+        TranscationInfo trans_info = data.transactionsInformation.Find(x => x.transactionId == transID);
+        if (trans_info != null)
+        {
+            int index = data.transactionsInformation.IndexOf(trans_info);
+            trans_info.transactionStatus = txConfirmed;
+            data.transactionsInformation[index] = trans_info;
+            if (txConfirmed.Equals("success"))
+            {
+                data.coins += trans_info.coinAmount;
+                data.transactionsInformation.RemoveAt(index);
+            }
+            UIManager.insta.ShowInfoMsg(trans_info.coinAmount + "Coins Purchased");
+
+            UpdateData(data);
+
+            if (UIManager.insta)
+            {
+                UIManager.insta.UpdatePlayerUIData(data);
+            }
+        }
+
+
+    }
+
+
+
 }
 [System.Serializable]
 public class LocalData
@@ -276,6 +340,7 @@ public class LocalData
     public string last_spin_time= "0";
     //public int xp = 0;
     public int coins;
+    public List<TranscationInfo> transactionsInformation = new List<TranscationInfo>();
 
     public LocalData()
     {  
@@ -283,6 +348,7 @@ public class LocalData
         coins = 0;      
         last_spin_time = "0";
         selectedTheme = 0;
+        transactionsInformation = new List<TranscationInfo>();
     }
 
 }
