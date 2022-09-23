@@ -955,8 +955,8 @@ MonoBehaviour:
     (Evmos testnet
     will be used authenticate)'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1d09d10475803d642b5a8b19f4d6482f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 1d09d10475803d642b5a8b19f4d6482f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1918,22 +1918,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 436611214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37352add7508fcc408ac0d2a301e7fba, type: 3}
+  m_Script: {fileID: 11500000, guid: 0182071dadd9ef3459d7d9aa7fecb4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   loadingPanel: {fileID: 41456461}
-  tutorialUI: {fileID: 200208139}
-  currentTutorial: 0
-  tutorialObjects:
-  - {fileID: 735451200}
-  - {fileID: 1029699626}
-  - {fileID: 2119888796}
-  - {fileID: 551522303}
-  - {fileID: 1918971208}
-  - {fileID: 832788137}
-  - {fileID: 1877931140}
-  - {fileID: 940760979}
-  - {fileID: 883791795}
 --- !u!1 &485694990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,8 +2102,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Login
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1d09d10475803d642b5a8b19f4d6482f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 1d09d10475803d642b5a8b19f4d6482f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2322,7 +2310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &598345994
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3531,13 +3519,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1019110892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d06b3e96dc127eb42ab4c869e013046c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6527cd9bf9179ad45b2c3517bce9ded7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _status: {fileID: 1355197938}
   playBTN: {fileID: 1887293198}
   loginBTN: {fileID: 1363233017}
-  mazeScreenshot: {fileID: 0}
   balanceNFT: 
 --- !u!4 &1019110894
 Transform:
@@ -3562,7 +3549,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1019110892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00111dbb36e13034ea652fe628f4af35, type: 3}
+  m_Script: {fileID: 11500000, guid: d034145cb0e47574cbb1adbd1ca27452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myTokenID: []
@@ -3627,8 +3614,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <color=yellow>[Currently this game does not support mobile web broser]</color>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1d09d10475803d642b5a8b19f4d6482f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 1d09d10475803d642b5a8b19f4d6482f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5222,8 +5209,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <color=white>Waiting for login...</color>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1d09d10475803d642b5a8b19f4d6482f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 1d09d10475803d642b5a8b19f4d6482f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6854,7 +6841,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1818020040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d43eb4bae3b04241aa137ff91c5c53b, type: 3}
+  m_Script: {fileID: 11500000, guid: de1becf34126d154c86dcb5c582755a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   allMetaDataServer: []
@@ -7258,7 +7245,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1948369512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d5ee2f95ac894b7188f3a8d47bf5786, type: 3}
+  m_Script: {fileID: 11500000, guid: c84198b9a93fae44c92159e30100c24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPlayerNFTData: []

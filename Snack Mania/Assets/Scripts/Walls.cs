@@ -9,7 +9,7 @@ public class Walls : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("being called" + food.grid.Count);
+       
         foreach (var item in food.grid)
         {
 
@@ -18,8 +18,7 @@ public class Walls : MonoBehaviour
                 item.position.y > bc2d.bounds.min.y &&
                 item.position.y < bc2d.bounds.max.y)
             {
-                food.EmptyCells.Remove(item);
-                Debug.Log("item found");
+                food.EmptyCells.Remove(item);                
             }
         }
     }
@@ -33,7 +32,7 @@ public class Walls : MonoBehaviour
                 item.position.y < bc2d.bounds.max.y)
             {
                 food.EmptyCells.Add(item);
-                Debug.Log("item found");
+               
             }
 
         }
