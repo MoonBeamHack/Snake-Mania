@@ -39,6 +39,8 @@ public class SnakeController : MonoBehaviour
     {
         //food.PopulateGrid(false);
         GameManager.isGameRunning = true;
+        GameManager.Instance.Score = 0;
+        UIManager.insta.UpdateScore();
         SetSpeed(Speed);
         AliveEyes.SetActive(true);
         DeadEyes.SetActive(false);
@@ -171,10 +173,10 @@ public class SnakeController : MonoBehaviour
         if(other.CompareTag("Food"))
         {
             Food food = other.GetComponent<Food>();
-            StartCoroutine(ChangeSkinColorCO(food.currentColor));
-
             food.RePosition();
             Grow();
+            GameManager.Instance.Score++;
+            UIManager.insta.UpdateScore();
         }
         if (other.CompareTag("Obstacle"))
         {
@@ -242,8 +244,8 @@ public class SnakeController : MonoBehaviour
     }
     public void SetSpeed(float speed)
     {
-        this.Speed = speed;
-        Time.timeScale = Speed / 10;
+        GameManager.Instance.speed = speed/10;
+        Time.timeScale = GameManager.Instance.speed;
     }
     public void TestingFullLength()
     {

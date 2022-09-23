@@ -59,8 +59,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] int currentTutorial = 0;
     [SerializeField] GameObject[] tutorialObjects;
 
+    [Header("GameOverUI")]
+    [SerializeField] GameObject GameOverUI;
+    [SerializeField] TMP_Text Score;
+    [SerializeField] TMP_Text CoinsAward;
 
+    [Header("GamePlay UI")]
+    [SerializeField] GameObject GamePlayUI;
+    [SerializeField] TMP_Text CurrentScore;
+    [SerializeField] GameObject PauseUI;
 
+    [SerializeField] TMP_Text CoinAmount;
 
     
     private void Awake()
@@ -174,8 +183,37 @@ public class UIManager : MonoBehaviour
     }
 
 
-   
-   
+    public void OpenGameOverPanel()
+    {
+        GameOverUI.SetActive(true);
+        GamePlayUI.SetActive(false);
+        Score.text = "Your Score : " + GameManager.Instance.Score.ToString();
+        CoinsAward.text = "Your Reward : " + ((int)(GameManager.Instance.Score /2)).ToString();
+        GameManager.Instance.CoinAmount += (int)(GameManager.Instance.Score / 2);
+        CoinAmount.text = GameManager.Instance.CoinAmount.ToString();
+       //int highscore = DatabaseManager.Instance.GetLocalData().highscore;
+    }
+
+    public void PauseGame(bool pause)
+    {
+        PauseUI.SetActive(pause);
+        if (pause)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = GameManager.Instance.speed;
+        }
+    }
+
+    public void UpdateScore()
+    {
+        CurrentScore.text = "Score : " + GameManager.Instance.Score.ToString();
+    }
+
+
+
 
 
 }

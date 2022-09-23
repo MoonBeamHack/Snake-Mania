@@ -17,12 +17,14 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public static bool isGameRunning;
-    public GameObject GameOverUI;
+    public int Score;
+    public int CoinAmount;
+    public float speed;
 
     public void GameOver()
     {
         Debug.Log("GameOver");
         isGameRunning = false;
-        GameOverUI.SetActive(true);
+        UIManager.insta.OpenGameOverPanel();
     }
 }
