@@ -17,10 +17,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public static bool isGameRunning;
+    public GameObject GameOverUI;
 
     public void GameOver()
     {
         Debug.Log("GameOver");
         isGameRunning = false;
+        GameOverUI.SetActive(true);
     }
 }

@@ -30,7 +30,7 @@ public class SnakeController : MonoBehaviour
     #region initialize snake
     public void StartGame()
     {
-        tempPos = transform.position;
+        transform.position = Vector3.zero;
         ResetGame();
         GetComponent<SpriteRenderer>().color = bonePrefab.GetComponent<SpriteRenderer>().color;
         
