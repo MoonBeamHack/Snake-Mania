@@ -23,5 +23,4 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameOver");
         isGameRunning = false;
     }
-
 }

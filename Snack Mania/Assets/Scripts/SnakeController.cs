@@ -28,7 +28,7 @@ public class SnakeController : MonoBehaviour
     public List<Transform> Bone = new List<Transform>();
     [SerializeField] bool doInstantly;
     #region initialize snake
-    private void Start()
+    public void StartGame()
     {
         tempPos = transform.position;
         ResetGame();

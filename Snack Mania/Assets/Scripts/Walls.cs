@@ -12,7 +12,7 @@ public class Walls : MonoBehaviour
         Debug.Log("being called" + food.grid.Count);
         foreach (var item in food.grid)
         {
-            Debug.Log("please be called");
+
             if (item.position.x < bc2d.bounds.max.x &&
                 item.position.x > bc2d.bounds.min.x &&
                 item.position.y > bc2d.bounds.min.y &&
