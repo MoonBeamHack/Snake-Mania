@@ -103,7 +103,7 @@ public class DatabaseManager : MonoBehaviour
                 //Debug.Log(obj.GetField("fields").GetField("musedata").GetField("stringValue").stringValue);
                 if (UIManager.insta)
                 {
-                    UIManager.insta.UpdatePlayerUIData(true, data);
+                    UIManager.insta.UpdatePlayerUIData(data);
                 }
             }
         }

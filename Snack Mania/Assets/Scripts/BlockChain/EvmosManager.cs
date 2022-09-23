@@ -242,7 +242,7 @@ public class EvmosManager : MonoBehaviour
 
 #endif
 
-           
+
             if (CovalentManager.insta)
             {
                 CovalentManager.insta.GetNFTUserBalance();
@@ -265,14 +265,9 @@ public class EvmosManager : MonoBehaviour
             Debug.Log(e, this);
             if (MessaeBox.insta)
             {
-                if (_no == 0)
-                {
-                    MessaeBox.insta.ShowRetryPopup(_no);
-                }
-                else
-                {
-                    MessaeBox.insta.showMsg("Server Error", true);
-                }
+
+                MessaeBox.insta.showMsg("Server Error", true);
+            
             }
 
         }
@@ -478,17 +473,9 @@ public class EvmosManager : MonoBehaviour
                 Debug.Log(www.error);
                 Debug.Log("UploadNFTMetadata upload error " + www.downloadHandler.text);
 
-                if (_id==0)
-                {
-                    if (MessaeBox.insta)
-                    {
-                        MessaeBox.insta.ShowRetryPopup(_id);
-                    }
-                }
-                else
-                {
+               
                     if (MessaeBox.insta) MessaeBox.insta.showMsg("Server error\nPlease try again", true);
-                }
+                
                 www.Abort();
                 www.Dispose();
             }

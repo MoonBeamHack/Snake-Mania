@@ -16,6 +16,8 @@ public class MessaeBox : MonoBehaviour
         insta = this;
         msgBoxUI.SetActive(false);
     }
+
+    Coroutine coroutine;
     public void showMsg(string _msg, bool showBtn)
     {
         StopAllCoroutines();
@@ -26,28 +28,9 @@ public class MessaeBox : MonoBehaviour
 
         msgText.text = _msg;
 
-        StartCoroutine(WaitToShowOk());
+        coroutine=StartCoroutine(WaitToShowOk());
     }
 
-
-    int temp_id = 0;
-    [SerializeField] GameObject retryBoxUI;
-    public void ShowRetryPopup(int _id)
-    {
-        retryBoxUI.SetActive(true);
-        temp_id = _id;
-    }
-    public void RetryClaim()
-    {
-        retryBoxUI.SetActive(false);
-        EvmosManager.Instance.purchaseItem(temp_id, false);
-
-    }
-    public void CancelClaim()
-    {
-        //BlockChainManager.Instance.purchaseItem(temp_id, true);
-        retryBoxUI.SetActive(false);
-    }
     IEnumerator WaitToShowOk()
     {
         if (!okBtn.activeSelf)
@@ -55,12 +38,14 @@ public class MessaeBox : MonoBehaviour
             yield return new WaitForSeconds(40);
             okBtn.SetActive(true);
         }
-
     }
 
     public void OkButton()
     {
-        StopAllCoroutines();
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }        
         msgBoxUI.SetActive(false);
     }
 }
