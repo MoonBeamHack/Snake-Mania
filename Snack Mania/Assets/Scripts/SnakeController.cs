@@ -12,6 +12,10 @@ public class SnakeController : MonoBehaviour
     [SerializeField] private List<Sprite> SkinColor = new List<Sprite>();
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Food food;
+    [SerializeField] private AudioSource AS;
+    [SerializeField] private AudioClip FoodClip;
+    [SerializeField] private AudioClip GameOverClip;
+
 
 
     private float OriginalSpeed;
@@ -179,13 +183,16 @@ public class SnakeController : MonoBehaviour
             Grow();
             GameManager.Instance.Score++;
             UIManager.insta.UpdateScore();
+            AS.clip = FoodClip;
         }
         if (other.CompareTag("Obstacle"))
         {
             GameManager.Instance.GameOver();
             DeadEyes.SetActive(true);
             AliveEyes.SetActive(false);
+            AS.clip = GameOverClip;
         }
+        AS.Play();
     }
 
     public void ChangeSkinColor(int colorID)
