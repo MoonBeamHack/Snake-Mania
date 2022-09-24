@@ -7,25 +7,6 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager insta;
 
-    
-
-    
-    
-
-
-
-     
-
- 
-
-  
-
-
-
-    [Header("Tutorial")]
-    [SerializeField] GameObject TutorialUI;
-    [SerializeField] int currentTutorial = 0;
-    [SerializeField] GameObject[] tutorialObjects;
 
     [Header("GameOverUI")]
     [SerializeField] GameObject GameOverUI;
@@ -40,7 +21,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] TMP_Text CoinAmount;
 
-    
+    [SerializeField] TMP_Text TokenAmount;
+
+
     private void Awake()
     {
         insta = this;
@@ -54,47 +37,18 @@ public class UIManager : MonoBehaviour
     }
 
 
-  
-    #region Tutorial
-    public void ShowTutorial()
-    {
-        TutorialUI.SetActive(true);
-        for (int i = 0; i < tutorialObjects.Length; i++)
-        {
-            tutorialObjects[i].SetActive(false);
-        }
-        tutorialObjects[currentTutorial].SetActive(true);
-    }
-    public void NextTutorial()
-    {
-        tutorialObjects[currentTutorial].SetActive(false);
-        currentTutorial++;
-        if (currentTutorial >= tutorialObjects.Length)
-        {
-            SkipTutorial();
-            return;
-        }
-        tutorialObjects[currentTutorial].SetActive(true);
-    }
-    public void SkipTutorial()
-    {
-        PlayerPrefs.SetInt("tutorial", 1);
-        TutorialUI.SetActive(false);
-        
-    }
 
 
-    #endregion
 
     public void UpdatePlayerUIData(LocalData data)
     {
         CoinAmount.text = data.coins.ToString();
     }
-  
+
 
 
     public TMP_Text txt_information;
-   
+
 
     public void DeductCoins(int _no)
     {
@@ -109,7 +63,7 @@ public class UIManager : MonoBehaviour
 
         MessaeBox.insta.showMsg("Not Enough Coins!", true);
 
-    }   
+    }
     Coroutine coroutine;
     public void ShowInfoMsg(string info)
     {
@@ -121,8 +75,8 @@ public class UIManager : MonoBehaviour
         {
             StopCoroutine(coroutine);
         }
-        
-        coroutine=StartCoroutine(disableTextInfo());
+
+        coroutine = StartCoroutine(disableTextInfo());
     }
     IEnumerator disableTextInfo()
     {
@@ -137,7 +91,7 @@ public class UIManager : MonoBehaviour
         GamePlayUI.SetActive(false);
         Score.text = "Your Score : " + GameManager.Instance.Score.ToString();
         CoinsAward.text = "Your Reward : " + ((int)(GameManager.Instance.Score)).ToString();
-        
+
         CoinAmount.text = GameManager.Instance.CoinAmount.ToString();
         int highscore = DatabaseManager.Instance.GetLocalData().highscore;
         LocalData data = DatabaseManager.Instance.GetLocalData();
@@ -145,10 +99,10 @@ public class UIManager : MonoBehaviour
 
         if (GameManager.Instance.Score > highscore)
         {
-                    
+
             highscore = GameManager.Instance.Score;
             data.highscore = highscore;
-          
+
         }
 
         DatabaseManager.Instance.UpdateData(data);

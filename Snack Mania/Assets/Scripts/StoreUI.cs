@@ -54,7 +54,7 @@ public class StoreUI : MonoBehaviour
         loadingUI.SetActive(true);
         mainShopUI.SetActive(false);
 
-        List<string> result = await MoonbeamManager.Instance.CheckPuzzleList();
+        List<string> result = await MoonbeamManager.Instance.GetNFTList();
         List<int> purchasedItems = new List<int>();
         purchasedItems.Add(0);
         if (result.Count > 0)

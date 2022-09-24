@@ -34,7 +34,7 @@ public class MoonbeamManager : MonoBehaviour
 
     public const string abiToken = "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"initialSupply\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"GetGameToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"subtractedValue\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getSmartContractBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_account\",\"type\":\"address\"}],\"name\":\"getuserBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"addedValue\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply_\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_another\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdrawErc20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]";
 
-    public const string contractToken = "0x144F30DD3e1D41313a33E4129A232EEB7e3B5d45";
+    public const string contractToken = "0x142C409B25761A0ED489e6Bb8A5eacb5A28eECe7";
 
     const string chain = "moonbeam";
     const string network = "testnet";
@@ -111,8 +111,9 @@ public class MoonbeamManager : MonoBehaviour
         playBTN.SetActive(true);
         loginBTN.SetActive(false);
         SingletonDataManager.userethAdd = account;
-        Debug.Log("Balace " + await CheckPuzzleList());
-
+        
+        getTokenBalance();
+        getDailyToken();
         //CheckPuzzleList();
 #endif
 
@@ -262,28 +263,56 @@ public class MoonbeamManager : MonoBehaviour
         }
         //return false;
     }
-    async public void CheckDatabaseTransactionStatusol(string Id)
+
+
+
+    async public static void getDailyToken()
     {
+
+
+       // Debug.Log("Redeem started");
+        object[] inputParams = { };
+        string method = "GetGameToken"; // buyBurnItem";// "buyCoins";
+
+        // array of arguments for contract
+        string args = Newtonsoft.Json.JsonConvert.SerializeObject(inputParams);
+        // value in wei
+        string value = "";// Convert.ToDecimal(wei).ToString();
+        // gas limit OPTIONAL
+        string gasLimit = "";
+        // gas price OPTIONAL
+        string gasPrice = "";
+        string response = "";
+        // connects to user's browser wallet (metamask) to update contract state
         try
         {
-            string txConfirmed = await EVM.TxStatus(chain, network, Id, networkRPC);
-            print(txConfirmed); // success, fail, pending
-            if (txConfirmed.Equals("success") || txConfirmed.Equals("fail"))
-            {
-                //CancelInvoke("CheckTransactionStatus");
-                if (DatabaseManager.Instance)
-                {
-                    DatabaseManager.Instance.ChangeTransactionStatus(Id, txConfirmed);
-                }
-            }
 
-
+#if !UNITY_EDITOR
+                response = await Web3GL.SendContract(method, tokenABI, tokenContract, args, value, gasLimit, gasPrice);
+                Debug.Log(response);
+#else
+            string data = await EVM.CreateContractData(abiToken, method, args);
+            response = await Web3Wallet.SendTransaction(chainId, contractToken, "0", data, gasLimit, gasPrice);
+            Debug.Log(response);
+#endif
 
         }
         catch (Exception e)
         {
-            Debug.Log(e, this);
+            Debug.Log("error" + e);
+            //if (MessaeBox.insta) MessaeBox.insta.showMsg("Server Error", true);
+            return;
         }
+
+        if (!string.IsNullOrEmpty(response))
+        {
+            //MessaeBox.insta.showMsg("Token will be credited soon", true);
+            Debug.Log("In check");
+            //CheckTransactionStatusWithTransID(response);
+
+
+        }
+
     }
 
     #region NonBurnNFTBuy
@@ -358,52 +387,6 @@ public class MoonbeamManager : MonoBehaviour
 
         }
     }
-    async public void NonBurnNFTPuzzleBuyContract(string _uri)
-    {
-
-
-        //string uri = "ipfs://bafyreifebcra6gmbytecmxvmro3rjbxs6oqosw3eyuldcwf2qe53gbrpxy/metadata.json";
-
-        object[] inputParams = { _uri };
-
-        string method = "mintPuzzleNFTItem"; // buyBurnItem";// "buyCoins";
-
-        // array of arguments for contract
-        string args = Newtonsoft.Json.JsonConvert.SerializeObject(inputParams);
-        // value in wei
-        string value = "";// Convert.ToDecimal(wei).ToString();
-        // gas limit OPTIONAL
-        string gasLimit = "";
-        // gas price OPTIONAL
-        string gasPrice = "";
-        // connects to user's browser wallet (metamask) to update contract state
-        try
-        {
-
-#if !UNITY_EDITOR
-                string response = await Web3GL.SendContract(method, abi, contract, args, value, gasLimit, gasPrice);
-                Debug.Log(response);
-#else
-            //string response = await EVM.Call(chain, network, contract, abi, args, method, args);
-            //Debug.Log(response);
-            string data = await EVM.CreateContractData(abi, method, args);
-            string response = await Web3Wallet.SendTransaction(chainId, contract, "0", data, gasLimit, gasPrice);
-            Debug.Log(response);
-
-#endif
-
-            if (MessaeBox.insta) MessaeBox.insta.showMsg("Your Transaction has been recieved\nIt will reflect to your account once it is completed!", true);
-
-
-
-            Debug.Log("New Balace " + await CheckNFTBalance());
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e, this);
-
-        }
-    }
     #endregion
 
 
@@ -433,11 +416,11 @@ public class MoonbeamManager : MonoBehaviour
 
     #region CheckNFTBalance
 
-    public string balanceNFT;
+    //public string balanceNFT;
 
     //public List<string> nftList = new List<string>();
 
-    public async Task<List<string>> CheckPuzzleList()
+    public async Task<List<string>> GetNFTList()
     {
         // smart contract method to call
         List<string> nftList = new List<string>();
@@ -511,25 +494,6 @@ public class MoonbeamManager : MonoBehaviour
         }
 
     }
-
-    async public Task<string> CheckNFTBalance()
-    {
-        int first = 500;
-        int skip = 0;
-        try
-        {
-            string response = await EVM.AllErc1155(chain, network, PlayerPrefs.GetString("Account"), contract, first, skip);
-            // string response = await EVM.BalanceOf(chain, network, PlayerPrefs.GetString("Account"), contract, first, skip);
-            Debug.Log(response);
-            balanceNFT = response;
-            return response;
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e, this);
-            return null;
-        }
-    }
     #endregion
 
     #region CheckUserBalance
@@ -547,11 +511,7 @@ public class MoonbeamManager : MonoBehaviour
                 // print(Convert.ToDecimal(eth).ToString());
                 Debug.Log(Convert.ToDecimal(eth).ToString());
                 userBalance = float.Parse(Convert.ToDecimal(eth).ToString());
-                /*if (StoreManager.insta)
-                {
-                    StoreManager.insta.SetBalanceText();
-                    StoreManager.insta.DisableOwnedItems();
-                }*/
+               
             }
         }
         catch (Exception e)
@@ -561,22 +521,6 @@ public class MoonbeamManager : MonoBehaviour
     }
     #endregion
 
-
-    #region getMetaData
-    async public void getMetaData()
-    {
-
-        try
-        {
-            string response = await ERC1155.URI(chain, network, contract, "400", networkRPC);
-            Debug.Log(response);
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e, this);
-        }
-    }
-    #endregion
 
     #region NFTUploaded
 
@@ -596,49 +540,8 @@ public class MoonbeamManager : MonoBehaviour
         StartCoroutine(Upload(Newtonsoft.Json.JsonConvert.SerializeObject(meta), _id, _skin));
 
     }
-    IEnumerator UploadNFTMetadata(string _metadata, int _id, bool _skin)
-    {
-        if (MessaeBox.insta) MessaeBox.insta.showMsg("NFT purchase process started\nThis can up to minute", false);
-        Debug.Log("Creating and saving metadata to IPFS..." + _metadata);
-        Debug.Log("Sending ID To SERVER " + _id);
-        WWWForm form = new WWWForm();
-        form.AddField("meta", _metadata);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("https://api.nft.storage/store", form))
-        {
-            www.SetRequestHeader("Authorization", "Bearer " + ConstantManager.nftStorage_key);
-            www.timeout = 40;
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-                Debug.Log("UploadNFTMetadata upload error " + www.downloadHandler.text);
-
-
-                if (MessaeBox.insta) MessaeBox.insta.showMsg("Server error\nPlease try again", true);
-
-                www.Abort();
-                www.Dispose();
-            }
-            else
-            {
-                Debug.Log("UploadNFTMetadata upload complete! " + www.downloadHandler.text);
-
-                JSONObject j = new JSONObject(www.downloadHandler.text);
-                if (j.HasField("value"))
-                {
-                    //Debug.Log("Predata " + j.GetField("value").GetField("ipnft").stringValue);
-                    SingletonDataManager.nftmetaCDI = j.GetField("value").GetField("url").stringValue; //ipnft
-                    //SingletonDataManager.tokenID = j.GetField("value").GetField("ipnft").stringValue; //ipnft
-                    Debug.Log("Metadata saved successfully");
-                    //PurchaseItem(cost, _id);                    
-                    if (!_skin) NonBurnNFTBuyContract(_id, j.GetField("value").GetField("url").stringValue);
-                }
-            }
-        }
-    }
-
+   
 
     IEnumerator Upload(string _metadata, int _id, bool _skin)
     {
