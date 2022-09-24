@@ -12,6 +12,7 @@ public class EvmosManager : MonoBehaviour
 {
     #region Singleton
     public static EvmosManager Instance;
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,17 +27,15 @@ public class EvmosManager : MonoBehaviour
     }
     #endregion
 
-    public const string abi = "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_itemId\",\"type\":\"uint256\"}],\"name\":\"buyCoins\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_tokenUrl\",\"type\":\"string\"}],\"name\":\"buyNonBurnItem\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"DoneStuff\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_tokenUrl\",\"type\":\"string\"}],\"name\":\"mintPuzzleNFTItem\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeBatchTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"TransferBatch\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"TransferSingle\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"}],\"name\":\"balanceOfBatch\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCurrentTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"_result\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPuzzleList\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"uri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]";
-
+    public const string abi = "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_itemId\",\"type\":\"uint256\"}],\"name\":\"BuyCoins\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_tokenUrl\",\"type\":\"string\"}],\"name\":\"buyNonBurnItem\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeBatchTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"TransferBatch\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"TransferSingle\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"}],\"name\":\"balanceOfBatch\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_add\",\"type\":\"address\"}],\"name\":\"GetAllUserToken\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCurrentTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"_result\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"uri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]";
     // address of contract
-    public const string contract = "0xE8A6F12C9a44D00AA361937622075eA88Aa0e87A";
+    public const string contract = "0x144F30DD3e1D41313a33E4129A232EEB7e3B5d45";
 
-    const string chain = "polygon";
-    // set network mainnet, testnet
+    const string chain = "moonbeam";
     const string network = "testnet";
-    const string chainId = "80001";
+    const string chainId = "1287";
 
-    //const string networkRPC = "https://eth.bd.evmos.dev:8545";
+    const string networkRPC = "https://moonbase-alpha.public.blastapi.io";
 
 
 
@@ -59,15 +58,15 @@ public class EvmosManager : MonoBehaviour
     [SerializeField] TMP_Text _status;
     [SerializeField] GameObject playBTN;
     [SerializeField] GameObject loginBTN;
-    
+
     private void Start()
     {
         //LoginWallet();
         //TestIT();
-        
+
     }
 
-  
+
     public async void LoginWallet()
     {
         _status.text = "Connecting...";
@@ -80,7 +79,7 @@ public class EvmosManager : MonoBehaviour
         // set expiration time
         int expirationTime = timestamp + 60;
         // set message
-        string message = expirationTime.ToString();
+        string message = "Snake Mania Moonbeam \n" + expirationTime.ToString();
         // sign message
         string signature = await Web3Wallet.Sign(message);
         // verify account
@@ -107,11 +106,7 @@ public class EvmosManager : MonoBehaviour
         playBTN.SetActive(true);
         loginBTN.SetActive(false);
         SingletonDataManager.userethAdd = account;
-        CovalentManager.insta.GetNFTUserBalance();
         Debug.Log("Balace " + await CheckNFTBalance());
-
-       // Debug.Log("LIST OF PUZZLE: " + await CheckPuzzleList());
-
 #endif
 
     }
@@ -158,7 +153,7 @@ public class EvmosManager : MonoBehaviour
         float wei = _amount * decimals;
         print(Convert.ToDecimal(wei).ToString() + " " + inputParams.ToString() + " + " + Newtonsoft.Json.JsonConvert.SerializeObject(inputParams));
         // smart contract method to call
-        string method = "buyCoins";
+        string method = "BuyCoins";
 
         // array of arguments for contract
         string args = Newtonsoft.Json.JsonConvert.SerializeObject(inputParams);
@@ -189,15 +184,19 @@ public class EvmosManager : MonoBehaviour
             if (!string.IsNullOrEmpty(response))
             {
                 transID = response;
-                InvokeRepeating("CheckTransactionStatus", 1*Time.timeScale, 5*Time.timeScale);
+                // InvokeRepeating("CheckTransactionStatus", 1*Time.timeScale, 5*Time.timeScale);
+
+
                 if (MessaeBox.insta) MessaeBox.insta.showMsg("Your Transaction has been recieved\nCoins will reflect to your account once it is completed!", true);
-            }
-            if (DatabaseManager.Instance)
-            {
-                DatabaseManager.Instance.AddTransaction(response, "pending", _pack);
-            }
 
+                if (DatabaseManager.Instance)
+                {
+                    DatabaseManager.Instance.AddTransaction(response, "pending", _pack);
+                }
 
+                CheckTransactionStatusWithTransID(response);
+
+            }
 
         }
         catch (Exception e)
@@ -205,39 +204,62 @@ public class EvmosManager : MonoBehaviour
             if (MessaeBox.insta) MessaeBox.insta.showMsg("Transaction Has Been Failed", true);
             Debug.Log(e, this);
         }
-    }    
+    }
     #endregion
 
     private string transID;
-    async public void CheckTransactionStatus()
+
+
+    async public UniTaskVoid CheckTransactionStatusWithTransID(string _trxID)
     {
+        Debug.Log("Check CheckTransactionStatusWithTransID ");
+        int _counter = 0;
+    HERE:
+        Debug.Log("Check Transaction " + _counter);
+        _counter++;
         try
         {
-            string txConfirmed = await EVM.TxStatus(chain, network, transID);
-            print(txConfirmed); // success, fail, pending
-            if (txConfirmed.Equals("success") || txConfirmed.Equals("fail"))
-            {
+            string txConfirmed = await EVM.TxStatus("", "", _trxID, networkRPC);
+            Debug.Log(txConfirmed); // success, fail, pending
 
-                // NonBurnNFTBuyContract(0, "ipfs://bafyreigkpnryq6t53skpbmfylegrp7wl3xkegzxq7ogimvnkzdceisya4a/metadata.json");
-                CancelInvoke("CheckTransactionStatus");
+            if (txConfirmed.Equals("success"))
+            {
+                Debug.Log("success sent");
+                //return true;
                 if (DatabaseManager.Instance)
                 {
-                    DatabaseManager.Instance.ChangeTransactionStatus(transID, txConfirmed);
+                    DatabaseManager.Instance.ChangeTransactionStatus(_trxID, txConfirmed);
                 }
-
+            }
+            else
+            {
+                Debug.Log("failed sent");
+                if (_counter > 15)
+                {
+                    Debug.Log("failed sent 2");
+                    //return false;
+                }
+                else
+                {
+                    Debug.Log("failed sent 3");
+                    await UniTask.Delay(5000, true);
+                    Debug.Log("failed sent 4");
+                    goto HERE;
+                }
             }
 
         }
         catch (Exception e)
         {
-            Debug.Log(e, this);
+            Debug.Log(e);
         }
+        //return false;
     }
-    async public void CheckDatabaseTransactionStatus(string Id)
+    async public void CheckDatabaseTransactionStatusol(string Id)
     {
         try
         {
-            string txConfirmed = await EVM.TxStatus(chain, network, Id);
+            string txConfirmed = await EVM.TxStatus(chain, network, Id, networkRPC);
             print(txConfirmed); // success, fail, pending
             if (txConfirmed.Equals("success") || txConfirmed.Equals("fail"))
             {
@@ -264,7 +286,7 @@ public class EvmosManager : MonoBehaviour
 
         //string uri = "ipfs://bafyreifebcra6gmbytecmxvmro3rjbxs6oqosw3eyuldcwf2qe53gbrpxy/metadata.json";
 
-        Debug.Log("Non Burn NFT Buy  " + _no +  "URI : "+_uri);
+        Debug.Log("Non Burn NFT Buy  " + _no + "URI : " + _uri);
 
         object[] inputParams = { _no, _uri };
 
@@ -295,10 +317,7 @@ public class EvmosManager : MonoBehaviour
 #endif
 
 
-            if (CovalentManager.insta)
-            {
-                CovalentManager.insta.GetNFTUserBalance();
-            }
+
 
             if (MessaeBox.insta) MessaeBox.insta.showMsg("Your Transaction has been recieved\nIt will reflect to your account once it is completed!", true);
 
@@ -327,18 +346,18 @@ public class EvmosManager : MonoBehaviour
             {
 
                 MessaeBox.insta.showMsg("Server Error", true);
-            
+
             }
 
         }
     }
-    async public void NonBurnNFTPuzzleBuyContract( string _uri)
+    async public void NonBurnNFTPuzzleBuyContract(string _uri)
     {
 
 
         //string uri = "ipfs://bafyreifebcra6gmbytecmxvmro3rjbxs6oqosw3eyuldcwf2qe53gbrpxy/metadata.json";
 
-        object[] inputParams = {  _uri };
+        object[] inputParams = { _uri };
 
         string method = "mintPuzzleNFTItem"; // buyBurnItem";// "buyCoins";
 
@@ -365,21 +384,17 @@ public class EvmosManager : MonoBehaviour
             Debug.Log(response);
 
 #endif
-            if (CovalentManager.insta)
-            {
-                CovalentManager.insta.GetNFTUserBalance();
-            }
 
             if (MessaeBox.insta) MessaeBox.insta.showMsg("Your Transaction has been recieved\nIt will reflect to your account once it is completed!", true);
-           
-            
-            
+
+
+
             Debug.Log("New Balace " + await CheckNFTBalance());
         }
         catch (Exception e)
         {
             Debug.Log(e, this);
-          
+
         }
     }
     #endregion
@@ -395,7 +410,7 @@ public class EvmosManager : MonoBehaviour
         string args = Newtonsoft.Json.JsonConvert.SerializeObject(inputParams);
         try
         {
-            string response = await EVM.Call(chain, network, contract, abi, method, args);
+            string response = await EVM.Call(chain, network, contract, abi, method, args, networkRPC);
             Debug.Log(response);
             return response;
 
@@ -415,7 +430,7 @@ public class EvmosManager : MonoBehaviour
         string args = Newtonsoft.Json.JsonConvert.SerializeObject(inputParams);
         try
         {
-            string response = await EVM.Call(chain, network, contract, abi, method, args);
+            string response = await EVM.Call(chain, network, contract, abi, method, args, networkRPC);
             Debug.Log(response);
             return response;
 
@@ -440,7 +455,7 @@ public class EvmosManager : MonoBehaviour
             string response = await EVM.AllErc1155(chain, network, PlayerPrefs.GetString("Account"), contract, first, skip);
             // string response = await EVM.BalanceOf(chain, network, PlayerPrefs.GetString("Account"), contract, first, skip);
             Debug.Log(response);
-            balanceNFT = response;           
+            balanceNFT = response;
             return response;
         }
         catch (Exception e)
@@ -457,7 +472,7 @@ public class EvmosManager : MonoBehaviour
         try
         {
 
-            string response = await EVM.BalanceOf(chain, network, PlayerPrefs.GetString("Account"));
+            string response = await EVM.BalanceOf(chain, network, PlayerPrefs.GetString("Account"), networkRPC);
             if (!string.IsNullOrEmpty(response))
             {
                 float wei = float.Parse(response);
@@ -480,14 +495,14 @@ public class EvmosManager : MonoBehaviour
     }
     #endregion
 
-    
+
     #region getMetaData
     async public void getMetaData()
     {
 
         try
         {
-            string response = await ERC1155.URI(chain, network, contract, "400");
+            string response = await ERC1155.URI(chain, network, contract, "400", networkRPC);
             Debug.Log(response);
         }
         catch (Exception e)
@@ -513,7 +528,7 @@ public class EvmosManager : MonoBehaviour
 
         StartCoroutine(UploadNFTMetadata(Newtonsoft.Json.JsonConvert.SerializeObject(meta), _id, _skin));
 
-    }   
+    }
     IEnumerator UploadNFTMetadata(string _metadata, int _id, bool _skin)
     {
         if (MessaeBox.insta) MessaeBox.insta.showMsg("NFT purchase process started\nThis can up to minute", false);
@@ -533,9 +548,9 @@ public class EvmosManager : MonoBehaviour
                 Debug.Log(www.error);
                 Debug.Log("UploadNFTMetadata upload error " + www.downloadHandler.text);
 
-               
-                    if (MessaeBox.insta) MessaeBox.insta.showMsg("Server error\nPlease try again", true);
-                
+
+                if (MessaeBox.insta) MessaeBox.insta.showMsg("Server error\nPlease try again", true);
+
                 www.Abort();
                 www.Dispose();
             }
@@ -556,10 +571,13 @@ public class EvmosManager : MonoBehaviour
             }
         }
     }
-   
+
     #endregion
 
 
 
-  
+
+
+
+
 }
