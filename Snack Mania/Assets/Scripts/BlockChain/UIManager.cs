@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
     public void UpdatePlayerUIData(LocalData data)
     {
         CoinAmount.text = data.coins.ToString();
+        TokenAmount.text = data.tokens;
     }
 
 
@@ -108,6 +109,10 @@ public class UIManager : MonoBehaviour
         DatabaseManager.Instance.UpdateData(data);
         UpdatePlayerUIData(data);
         HighScore_Txt.text = "High Score : " + highscore;
+
+        if (GameManager.Instance.Score >= 10) {
+            MoonbeamManager.Instance.getDailyToken();
+        }
 
     }
 

@@ -84,7 +84,7 @@ public class MoonbeamManager : MonoBehaviour
         // set expiration time
         int expirationTime = timestamp + 60;
         // set message
-        string message = "Snake Mania Moonbeam \n" + expirationTime.ToString();
+        string message = "Snake Mania Moonbeam\n" + expirationTime.ToString();
         // sign message
         string signature = await Web3Wallet.Sign(message);
         // verify account
@@ -113,7 +113,7 @@ public class MoonbeamManager : MonoBehaviour
         SingletonDataManager.userethAdd = account;
         
         getTokenBalance();
-        getDailyToken();
+        //getDailyToken();
         //CheckPuzzleList();
 #endif
 
@@ -191,7 +191,6 @@ public class MoonbeamManager : MonoBehaviour
 
             if (!string.IsNullOrEmpty(response))
             {
-                transID = response;
                 // InvokeRepeating("CheckTransactionStatus", 1*Time.timeScale, 5*Time.timeScale);
 
 
@@ -202,7 +201,7 @@ public class MoonbeamManager : MonoBehaviour
                     DatabaseManager.Instance.AddTransaction(response, "pending", _pack);
                 }
 
-                CheckTransactionStatusWithTransID(response);
+                CheckTransactionStatusWithTransID(response,0);
 
             }
 
@@ -215,10 +214,9 @@ public class MoonbeamManager : MonoBehaviour
     }
     #endregion
 
-    private string transID;
+    
 
-
-    async public UniTaskVoid CheckTransactionStatusWithTransID(string _trxID)
+    async public static void CheckTransactionStatusWithTransID(string _trxID, int _type)
     {
         Debug.Log("Check CheckTransactionStatusWithTransID ");
         int _counter = 0;
@@ -234,9 +232,16 @@ public class MoonbeamManager : MonoBehaviour
             {
                 Debug.Log("success sent");
                 //return true;
-                if (DatabaseManager.Instance)
+                if (_type == 0) //coin balanace
                 {
-                    DatabaseManager.Instance.ChangeTransactionStatus(_trxID, txConfirmed);
+                    if (DatabaseManager.Instance)
+                    {
+                        DatabaseManager.Instance.ChangeTransactionStatus(_trxID, txConfirmed);
+                    }
+                }
+                if (_type == 1) // token confirm
+                {
+                    getTokenBalance();
                 }
             }
             else
@@ -266,11 +271,9 @@ public class MoonbeamManager : MonoBehaviour
 
 
 
-    async public static void getDailyToken()
+    async public void getDailyToken()
     {
 
-
-       // Debug.Log("Redeem started");
         object[] inputParams = { };
         string method = "GetGameToken"; // buyBurnItem";// "buyCoins";
 
@@ -307,10 +310,14 @@ public class MoonbeamManager : MonoBehaviour
         if (!string.IsNullOrEmpty(response))
         {
             //MessaeBox.insta.showMsg("Token will be credited soon", true);
-            Debug.Log("In check");
+             CheckTransactionStatusWithTransID(response, 1);
+            //Debug.Log("In check");
             //CheckTransactionStatusWithTransID(response);
 
 
+        }
+        else {
+            Debug.Log("In check blank");
         }
 
     }

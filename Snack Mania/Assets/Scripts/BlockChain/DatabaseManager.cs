@@ -144,7 +144,7 @@ public class DatabaseManager : MonoBehaviour
                         if (data.transactionsInformation[i].transactionStatus.Equals("pending"))
                         {
                             Debug.Log("Pending Test 1");
-                            MoonbeamManager.Instance.CheckTransactionStatusWithTransID(data.transactionsInformation[i].transactionId);
+                            MoonbeamManager.CheckTransactionStatusWithTransID(data.transactionsInformation[i].transactionId,0);
                         }
                     }
                 }
