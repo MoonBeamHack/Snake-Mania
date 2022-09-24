@@ -3409,7 +3409,7 @@ GameObject:
   - component: {fileID: 1019110894}
   - component: {fileID: 1019110893}
   m_Layer: 0
-  m_Name: BCManagaer
+  m_Name: MoonbeamManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3431,6 +3431,7 @@ MonoBehaviour:
   playBTN: {fileID: 1887293198}
   loginBTN: {fileID: 1363233017}
   balanceNFT: 
+  nftList: []
 --- !u!4 &1019110894
 Transform:
   m_ObjectHideFlags: 0

@@ -340,6 +340,7 @@ public class LocalData
     public string last_spin_time= "0";
     //public int xp = 0;
     public int coins;
+    public string tokens = "0";
     public List<TranscationInfo> transactionsInformation = new List<TranscationInfo>();
 
     public LocalData()
@@ -348,6 +349,7 @@ public class LocalData
         coins = 0;      
         last_spin_time = "0";
         selectedTheme = 0;
+        tokens = "0";
         transactionsInformation = new List<TranscationInfo>();
     }
 

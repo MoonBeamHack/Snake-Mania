@@ -54,23 +54,23 @@ public class StoreUI : MonoBehaviour
         loadingUI.SetActive(true);
         mainShopUI.SetActive(false);
 
-        string result = await MoonbeamManager.Instance.CheckNFTBalance();
+        List<string> result = await MoonbeamManager.Instance.CheckPuzzleList();
         List<int> purchasedItems = new List<int>();
         purchasedItems.Add(0);
-        if (!string.IsNullOrEmpty(result) && result != "[]")
+        if (result.Count > 0)
         {
             Debug.Log(result);
 
-            JSONObject jsonObject = new JSONObject(result);
+            //JSONObject jsonObject = new JSONObject(result);
 
-            for (int i = 0; i < jsonObject.count; i++)
+            for (int i = 0; i < result.Count; i++)
             {
 
-                Debug.Log(jsonObject[i].GetField("tokenId"));
+                Debug.Log(result[i]);
 
-                if (jsonObject[i].GetField("tokenId").stringValue.StartsWith("50") && jsonObject[i].GetField("tokenId").stringValue.Length == 3)
+                if (result[i].StartsWith("70") && result[i].Length == 3)
                 { 
-                    int id = Int32.Parse(jsonObject[i].GetField("tokenId").stringValue) - 499;
+                    int id = Int32.Parse(result[i]) - 699;
 
                     if (id >= 0 && id < nft_themes_buttons.Length)
                     {
@@ -92,7 +92,7 @@ public class StoreUI : MonoBehaviour
             }
             else
             {
-                nft_themes_buttons[temp].transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => {  BuyThemeFromShop(temp); });
+                nft_themes_buttons[temp].transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => {  BuyThemeFromShop(temp-1); });
                 nft_themes_buttons[temp].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Buy";
                 nft_themes_buttons[temp].transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
             }
