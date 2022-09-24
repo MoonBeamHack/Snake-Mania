@@ -144,7 +144,7 @@ public class DatabaseManager : MonoBehaviour
                         if (data.transactionsInformation[i].transactionStatus.Equals("pending"))
                         {
                             Debug.Log("Pending Test 1");
-                            EvmosManager.Instance.CheckDatabaseTransactionStatus(data.transactionsInformation[i].transactionId);
+                            MoonbeamManager.Instance.CheckTransactionStatusWithTransID(data.transactionsInformation[i].transactionId);
                         }
                     }
                 }
@@ -254,7 +254,7 @@ public class DatabaseManager : MonoBehaviour
     async public Task<long> GetCurrentTime()
     {
         
-        string result =await EvmosManager.Instance.CheckTimeStatus();
+        string result =await MoonbeamManager.Instance.CheckTimeStatus();
        
         long currentEpoch;
         if (!string.IsNullOrEmpty(result))

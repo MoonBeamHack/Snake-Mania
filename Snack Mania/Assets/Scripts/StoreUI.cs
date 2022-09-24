@@ -1,4 +1,4 @@
-using Defective.JSON;
+﻿using Defective.JSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ public class StoreUI : MonoBehaviour
     {
         for (int i = 0; i < balanceText.Length; i++)
         {
-            balanceText[i].text = "Balance : " + EvmosManager.userBalance.ToString();
+            balanceText[i].text = "Balance : " + MoonbeamManager.userBalance.ToString();
         }
 
     }
@@ -54,7 +54,7 @@ public class StoreUI : MonoBehaviour
         loadingUI.SetActive(true);
         mainShopUI.SetActive(false);
 
-        string result = await EvmosManager.Instance.CheckNFTBalance();
+        string result = await MoonbeamManager.Instance.CheckNFTBalance();
         List<int> purchasedItems = new List<int>();
         purchasedItems.Add(0);
         if (!string.IsNullOrEmpty(result) && result != "[]")
@@ -111,7 +111,7 @@ public class StoreUI : MonoBehaviour
             return;
         }
         lastBoughtSkin = index;
-        EvmosManager.Instance.purchaseItem(index, false);
+        MoonbeamManager.Instance.purchaseItem(index, false);
     }
     public void EnableNewItem()
     {

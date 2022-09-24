@@ -8,10 +8,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class EvmosManager : MonoBehaviour
+public class MoonbeamManager : MonoBehaviour
 {
     #region Singleton
-    public static EvmosManager Instance;
+    public static MoonbeamManager Instance;
 
     private void Awake()
     {

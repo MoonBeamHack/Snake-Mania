@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +14,6 @@ public class InAppPurchase : MonoBehaviour
 
     public void BuyCoins(int Index)
     {
-        EvmosManager.Instance.CoinBuyOnSendContract(Index);
+        MoonbeamManager.Instance.CoinBuyOnSendContract(Index);
     }
 }
