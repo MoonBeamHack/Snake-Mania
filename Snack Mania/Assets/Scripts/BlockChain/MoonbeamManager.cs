@@ -237,11 +237,13 @@ public class MoonbeamManager : MonoBehaviour
                     if (DatabaseManager.Instance)
                     {
                         DatabaseManager.Instance.ChangeTransactionStatus(_trxID, txConfirmed);
+                        MessaeBox.insta.showMsg("Coin transaction confirmed and credited", true);
                     }
                 }
                 if (_type == 1) // token confirm
                 {
                     getTokenBalance();
+                    MessaeBox.insta.showMsg("Game token transaction confirmed and credited", true);
                 }
             }
             else
@@ -291,7 +293,7 @@ public class MoonbeamManager : MonoBehaviour
         {
 
 #if !UNITY_EDITOR
-                response = await Web3GL.SendContract(method, tokenABI, tokenContract, args, value, gasLimit, gasPrice);
+                response = await Web3GL.SendContract(method, abiToken, contractToken, args, value, gasLimit, gasPrice);
                 Debug.Log(response);
 #else
             string data = await EVM.CreateContractData(abiToken, method, args);

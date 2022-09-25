@@ -31,6 +31,8 @@ public class MessaeBox : MonoBehaviour
         coroutine=StartCoroutine(WaitToShowOk());
     }
 
+   
+
     IEnumerator WaitToShowOk()
     {
         if (!okBtn.activeSelf)

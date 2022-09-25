@@ -24,6 +24,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text TokenAmount;
 
 
+    [SerializeField] GameObject tokenUI;
+
+
     private void Awake()
     {
         insta = this;
@@ -111,9 +114,15 @@ public class UIManager : MonoBehaviour
         HighScore_Txt.text = "High Score : " + highscore;
 
         if (GameManager.Instance.Score >= 10) {
-            MoonbeamManager.Instance.getDailyToken();
+            tokenUI.SetActive(true);
+            
         }
 
+    }
+
+    public void RedeemToken() {
+        MessaeBox.insta.showMsg("Token redeem process started", false);
+        MoonbeamManager.Instance.getDailyToken();
     }
 
     public void PauseGame(bool pause)
