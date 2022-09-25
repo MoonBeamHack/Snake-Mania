@@ -121,6 +121,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void RedeemToken() {
+        tokenUI.SetActive(false);
         MessaeBox.insta.showMsg("Token redeem process started", false);
         MoonbeamManager.Instance.getDailyToken();
     }
