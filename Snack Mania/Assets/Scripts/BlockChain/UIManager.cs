@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject Walls;
     [SerializeField] Food FoodInit;
-    [SerializeField] bool FirstInit = false;
+    [SerializeField] bool isInitialized = false;
 
     public SnakeController snakePlayer;
     private void Awake()
@@ -47,13 +47,19 @@ public class UIManager : MonoBehaviour
 
     public void StartGame() {
         snakePlayer.gameObject.SetActive(true);
-        Walls.SetActive(true);
         snakePlayer.StartGame();
+        Walls.SetActive(true);
     }
     public void FirstInitGame() {
-        if (FirstInit) return;
-        FoodInit.PopulateGrid(true);
-        FirstInit = true;
+        if (!isInitialized)
+        {
+            FoodInit.PopulateGrid(true);
+            isInitialized = true;
+        }
+        else
+        {
+            FoodInit.PopulateGrid(false);
+        }
     }
 
 
