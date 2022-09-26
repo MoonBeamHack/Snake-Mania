@@ -36,12 +36,14 @@ public class Food : MonoBehaviour
         }
         else
         {
-            var oldOccupied = grid.FindAll(x => x.Occupied == true);
-            for (int i = 0; i < oldOccupied.Count; i++)
+            UIManager.insta.Walls.SetActive(false);
+            EmptyCells.Clear();
+            for (int i = 0; i < grid.Count; i++)
             {
-                oldOccupied[i].Occupied = false;
-                EmptyCells.Add(oldOccupied[i]);
+                grid[i].Occupied = false;
+                EmptyCells.Add(grid[i]);
             }
+            UIManager.insta.Walls.SetActive(true);
         }
         
     }

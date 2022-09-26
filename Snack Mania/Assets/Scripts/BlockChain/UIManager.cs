@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject tokenUI;
 
-    [SerializeField] GameObject Walls;
+    public GameObject Walls;
     [SerializeField] Food FoodInit;
     [SerializeField] bool isInitialized = false;
 
