@@ -32,6 +32,7 @@ public class StoreUI : MonoBehaviour
         {
             item.GetComponent<Image>().sprite = demoColor[newColor];
         }
+        Debug.Log("trying skin");
         sController.ChangeSkinColor(newColor);
     }
 
@@ -45,13 +46,14 @@ public class StoreUI : MonoBehaviour
     }
     private void OnEnable()
     {
-
-        SkinDemo(DatabaseManager.Instance.GetLocalData().selectedTheme);
+        int selectedTheme = DatabaseManager.Instance.GetLocalData().selectedTheme;
+        SkinDemo(selectedTheme);
         SetBalanceText();
-        DisableOwnedItems();
+        DisableOwnedItems(selectedTheme);
+        
     }   
 
-    async public void DisableOwnedItems()
+    async public void DisableOwnedItems(int selectedTheme)
     {
         loadingUI.SetActive(true);
         mainShopUI.SetActive(false);
@@ -99,11 +101,11 @@ public class StoreUI : MonoBehaviour
                 nft_themes_buttons[temp].transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
             }
         }
-
+        nft_themes_buttons[selectedTheme].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Selected";
         loadingUI.SetActive(false);
         mainShopUI.SetActive(true);
     }
-    int lastBoughtSkin=-1;
+    public int lastBoughtSkin=-1;
     public void BuyThemeFromShop(int index)
     {
         LocalData data = DatabaseManager.Instance.GetLocalData();
@@ -112,7 +114,7 @@ public class StoreUI : MonoBehaviour
             UIManager.insta.ShowNoCoinsPopup();
             return;
         }
-        lastBoughtSkin = index;
+        lastBoughtSkin = index+1;
         MoonbeamManager.Instance.purchaseItem(index, false);
     }
     public void EnableNewItem()
@@ -128,6 +130,14 @@ public class StoreUI : MonoBehaviour
     public void SelectTheme(int index)
     {
         LocalData data = DatabaseManager.Instance.GetLocalData();
+        for (int i = 0; i < nft_themes_buttons.Length; i++)
+        {
+           var childText = nft_themes_buttons[i].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
+            if (childText.text == "Selected") childText.text = "Select";
+            else if (index == i) childText.text = "Selected";
+
+            Debug.Log(childText + " " + i);
+        }
         data.selectedTheme = index;
         DatabaseManager.Instance.UpdateData(data);
         SkinDemo(data.selectedTheme);

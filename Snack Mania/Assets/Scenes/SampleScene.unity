@@ -2240,7 +2240,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &389555467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4433,7 +4433,7 @@ MonoBehaviour:
   tokenUI: {fileID: 329219638}
   Walls: {fileID: 4670290420270119527}
   FoodInit: {fileID: 890292065}
-  FirstInit: 0
+  isInitialized: 0
   snakePlayer: {fileID: 962581678}
   txt_information: {fileID: 8353757410386687498}
 --- !u!1 &785359623
@@ -4817,7 +4817,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7561,7 +7561,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -12197,7 +12197,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!1 &8485334050219901257
 GameObject:
   m_ObjectHideFlags: 0
@@ -12464,6 +12464,7 @@ MonoBehaviour:
   mainShopUI: {fileID: 998855977}
   loadingUI: {fileID: 2000595501}
   sController: {fileID: 962581678}
+  lastBoughtSkin: -1
 --- !u!1 &8485334050238302951
 GameObject:
   m_ObjectHideFlags: 0
@@ -12613,7 +12614,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!1 &8485334050308161753
 GameObject:
   m_ObjectHideFlags: 0
@@ -13331,7 +13332,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &8485334051047804758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14995,7 +14996,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &8485334052070354865
 MonoBehaviour:
   m_ObjectHideFlags: 0
