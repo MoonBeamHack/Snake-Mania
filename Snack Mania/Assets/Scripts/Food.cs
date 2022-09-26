@@ -63,6 +63,24 @@ public class Food : MonoBehaviour
         GetComponent<SpriteRenderer>().color = FruitType[currentColor];
         //EmptyCells.Clear();
     }
+
+    public void TestingGrid()
+    {
+        StartCoroutine(testCO());
+    }
+
+    IEnumerator testCO()
+    {
+        float original = Time.timeScale;
+        Time.timeScale = 0;
+        for (int i = 0; i < grid.Count; i++)
+        {
+            if (EmptyCells.Contains(grid[i])) continue;
+            transform.position = grid[i].position;
+            yield return new WaitForSecondsRealtime(0.2f);
+        }
+        Time.timeScale = original;
+    }
     #endregion
 }
 
