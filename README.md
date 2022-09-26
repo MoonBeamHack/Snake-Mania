@@ -1,6 +1,8 @@
 # Snake Mania - Moonbeam Alpha
 Snake Mania is classic web3 game with DeFi, NFT-1155, ERC-20 token based fun and enteraining game
 
+### [Click here to Play](https://www.thundergamestudio.com/moonbeamsnakemania/)
+
 ## Features
 * Simple classic gameplay with arrow controls
 * Decentralised finance system (DeFi) with in-app items with Moonbeam Alpha
