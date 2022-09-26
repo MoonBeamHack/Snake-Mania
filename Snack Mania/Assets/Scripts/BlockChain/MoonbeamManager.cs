@@ -305,13 +305,13 @@ public class MoonbeamManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log("error" + e);
-            //if (MessaeBox.insta) MessaeBox.insta.showMsg("Server Error", true);
+            if (MessaeBox.insta) MessaeBox.insta.showMsg("Server Error", true);
             return;
         }
 
         if (!string.IsNullOrEmpty(response))
         {
-            //MessaeBox.insta.showMsg("Token will be credited soon", true);
+             MessaeBox.insta.showMsg("Token will be credited soon", true);
              CheckTransactionStatusWithTransID(response, 1);
             //Debug.Log("In check");
             //CheckTransactionStatusWithTransID(response);
@@ -319,6 +319,7 @@ public class MoonbeamManager : MonoBehaviour
 
         }
         else {
+            if (MessaeBox.insta) MessaeBox.insta.showMsg("Server Error", true);
             Debug.Log("In check blank");
         }
 

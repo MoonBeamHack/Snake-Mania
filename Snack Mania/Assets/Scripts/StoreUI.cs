@@ -19,6 +19,8 @@ public class StoreUI : MonoBehaviour
     [SerializeField] GameObject mainShopUI;
     [SerializeField] GameObject loadingUI;
 
+    [SerializeField] SnakeController sController;
+
     private void Awake()
     {
         insta = this;
@@ -30,7 +32,7 @@ public class StoreUI : MonoBehaviour
         {
             item.GetComponent<Image>().sprite = demoColor[newColor];
         }
-        FindObjectOfType<SnakeController>().ChangeSkinColor(newColor);
+        sController.ChangeSkinColor(newColor);
     }
 
     public void SetBalanceText()

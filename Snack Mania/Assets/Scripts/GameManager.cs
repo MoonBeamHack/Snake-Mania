@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        isGameRunning = false;
     }
     #endregion
 
@@ -21,11 +23,15 @@ public class GameManager : MonoBehaviour
     public int CoinAmount;
     public float speed;
 
+   
+
     public void GameOver()
     {
         Debug.Log("GameOver");
         isGameRunning = false;
         CoinAmount += (int)( Score);
         UIManager.insta.OpenGameOverPanel();
+        UIManager.insta.snakePlayer.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 }

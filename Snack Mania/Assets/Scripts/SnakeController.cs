@@ -34,6 +34,11 @@ public class SnakeController : MonoBehaviour
     #region initialize snake
     public void StartGame()
     {
+        
+        Time.timeScale = 0;
+
+        UIManager.insta.FirstInitGame();
+
         ChangeSkinColor(DatabaseManager.Instance.GetLocalData().selectedTheme);
 
         transform.position = Vector3.zero;

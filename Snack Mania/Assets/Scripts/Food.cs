@@ -16,8 +16,10 @@ public class Food : MonoBehaviour
 
     private void Awake()
     {
-        PopulateGrid(Initialize);
+       // PopulateGrid(Initialize);
     }
+
+   
     public void PopulateGrid(bool FirstTime)
     {
         if (FirstTime)

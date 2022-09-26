@@ -1406,8 +1406,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 962581678}
-        m_TargetAssemblyTypeName: SnakeController, Assembly-CSharp
+      - m_Target: {fileID: 767054093}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -2122,8 +2122,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 962581678}
-        m_TargetAssemblyTypeName: SnakeController, Assembly-CSharp
+      - m_Target: {fileID: 767054093}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -4356,7 +4356,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.3
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -4431,6 +4431,10 @@ MonoBehaviour:
   CoinAmount: {fileID: 1895025864}
   TokenAmount: {fileID: 1176377168}
   tokenUI: {fileID: 329219638}
+  Walls: {fileID: 4670290420270119527}
+  FoodInit: {fileID: 890292065}
+  FirstInit: 0
+  snakePlayer: {fileID: 962581678}
   txt_information: {fileID: 8353757410386687498}
 --- !u!1 &785359623
 GameObject:
@@ -5431,6 +5435,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 879776262}
   m_CullTransparentMesh: 1
+--- !u!114 &890292065 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4670290421766748503, guid: aa53f12aef271584eb00d0d7e5aba54a, type: 3}
+  m_PrefabInstance: {fileID: 4670290420270119526}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9a039a633c7d34ea2f5a75a6ecd224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &896599096
 GameObject:
   m_ObjectHideFlags: 0
@@ -11769,6 +11784,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4670290419949842114, guid: aa53f12aef271584eb00d0d7e5aba54a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670290420423716557, guid: aa53f12aef271584eb00d0d7e5aba54a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670290421006136297, guid: aa53f12aef271584eb00d0d7e5aba54a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4670290421274981972, guid: aa53f12aef271584eb00d0d7e5aba54a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -11817,8 +11844,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Area
       objectReference: {fileID: 0}
+    - target: {fileID: 4670290421363409808, guid: aa53f12aef271584eb00d0d7e5aba54a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa53f12aef271584eb00d0d7e5aba54a, type: 3}
+--- !u!1 &4670290420270119527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4670290419949842114, guid: aa53f12aef271584eb00d0d7e5aba54a, type: 3}
+  m_PrefabInstance: {fileID: 4670290420270119526}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8353757410386687496
 GameObject:
   m_ObjectHideFlags: 0
@@ -12427,6 +12463,7 @@ MonoBehaviour:
   - {fileID: 785359625}
   mainShopUI: {fileID: 998855977}
   loadingUI: {fileID: 2000595501}
+  sController: {fileID: 962581678}
 --- !u!1 &8485334050238302951
 GameObject:
   m_ObjectHideFlags: 0
